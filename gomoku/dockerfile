@@ -1,15 +1,23 @@
-FROM node:18-alpine
+# nodeのバージョンを18に設定
+FROM node:18-alpine 
 
+# appディレクトリを作成
 WORKDIR /app
 
+# package.json package-lock.jsonをコピーする
 COPY package.json package-lock.json ./
 
+# 必要なパッケージをインストール
 RUN npm install
 
+# ソースコードをコピーする
 COPY . .
 
+# appをビルド
 RUN npm run build
 
+# コンテナ内のポート番号を3000番に設定
 EXPOSE 3000
 
+# npm startでアプリを起動
 CMD ["npm", "start"]
