@@ -1,4 +1,5 @@
-FROM node:18-alpine
+# nodeのバージョンを18に設定
+FROM node:18-alpine 
 
 WORKDIR /app
 
