@@ -1,0 +1,10 @@
+version: '3'
+services:
+  gomoku-app:
+    build:
+      context: ./gomoku
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./gomoku:/app
+      - /app/node_modules
