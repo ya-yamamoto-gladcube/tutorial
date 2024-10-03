@@ -3,8 +3,21 @@ services:
   gomoku-app:
     build:
       context: ./gomoku
-    ports:
-      - "3000:3000"
     volumes:
-      - ./gomoku:/app
-      - /app/node_modules # マウントを避ける（ないとエラー起きる）
+      - gomoku_build:/app/build
+    command: ["echo", "Build complete."]
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - gomoku_build:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - gomoku-app
+
+volumes:
+  gomoku_build:
