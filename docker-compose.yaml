@@ -3,6 +3,20 @@ services:
   gomoku-app:
     build:
       context: ./gomoku
+    volumes:
+      - gomoku_build:/app/build
+    command: ["echo", "Build complete."]
+
+  nginx:
+    build:
+      context: ./nginx
     ports:
       - "443:443"
-      - "80:80"  # HTTPからHTTPSへのリダイレクト用
+      - "80:80"
+    volumes:
+      - gomoku_build:/usr/share/nginx/html
+    depends_on:
+      - gomoku-app
+
+volumes:
+  gomoku_build:
