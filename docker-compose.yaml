@@ -4,7 +4,5 @@ services:
     build:
       context: ./gomoku
     ports:
-      - "3000:3000"
-    volumes:
-      - ./gomoku:/app
-      - /app/node_modules
+      - "443:443"
+      - "80:80"  # HTTPからHTTPSへのリダイレクト用
