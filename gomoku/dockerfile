@@ -1,13 +1,17 @@
-# gomoku/Dockerfile
-
+# バージョンの設定
 FROM node:18-alpine
 
+# ディレクトリを作成
 WORKDIR /app
 
+# package.json package-lock.jsonをコピー
 COPY package.json package-lock.json ./
+
+# node_modulesをインストール
 RUN npm install
 
+# ソースコードをコピー
 COPY . .
-RUN npm run build
 
-# ビルド成果物をそのまま/app/buildに出力
+# ビルド
+RUN npm run build
