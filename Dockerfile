@@ -4,12 +4,10 @@ FROM node:18-alpine AS build
 # 作業ディレクトリを設定
 WORKDIR /app/gomoku
 
-# 依存関係のインストール
-COPY gomoku/package.json gomoku/package-lock.json ./
-RUN npm install
-
 # ソースコードをコピー
 COPY gomoku ./
+
+RUN npm ci
 
 # アプリケーションをビルド
 RUN npm run build
