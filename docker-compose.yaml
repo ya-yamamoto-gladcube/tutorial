@@ -1,23 +1,12 @@
 version: '3'
 services:
-  gomoku-app:
+  web:
     build:
-      context: ./gomoku
-    volumes:
-      - gomoku_build:/app/build
-    command: ["echo", "Build complete."]
-
-  nginx:
-    build:
-      context: ./nginx
+      context: .
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - gomoku_build:/usr/share/nginx/html
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - gomoku-app
-
-volumes:
-  gomoku_build:
+      # SSL証明書が必要な場合
+      - ./certs:/etc/nginx/certs
